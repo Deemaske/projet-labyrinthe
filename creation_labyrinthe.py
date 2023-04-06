@@ -61,7 +61,7 @@ def labyrinthe(dimension):
         voisin = voisin_non_visite(tableau, x, y)
         if voisin:
             stack.append((x,y))
-            prochain = voisin[randint(0,len(voisin)-1)]
+            prochain = choice(voisin)
             tableau[y][x].direction[prochain] = 1
             x = x+1 if prochain == 1 else x-1 if prochain==3 else x
             y = y+1 if prochain == 2 else y-1 if prochain==0 else y
