@@ -1,4 +1,4 @@
-from creation_labyrinthe import labyrinthe,Tuile,CASE_DEPART
+from creation_labyrinthe import labyrinthe,Tuile
 from PIL import Image
 import pygame
 
@@ -28,8 +28,8 @@ def dessiner(tableau):
                 image.putpixel((x*3,y*3+1),couleur)
     return image
 
-img = dessiner(labyrinthe(20))
-img = img.resize((500,500),Image.Resampling.BOX)
+img = dessiner(labyrinthe(25))
+img = img.resize((600,600),Image.Resampling.BOX)
 img.save("bg.png", format="png")
 
 pygame.init()
