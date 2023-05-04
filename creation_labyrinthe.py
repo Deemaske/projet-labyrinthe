@@ -51,6 +51,8 @@ def labyrinthe(dimension):
         une liste de liste de tuile"""
     tableau = [[Tuile() for i in range(dimension)] for j in range(dimension)]
     x,y = randint(0, dimension-1), randint(0, dimension-1)
+    CASE_DEPART = (x,y)
+    global CASE_DEPART
     tableau[y][x].visitee = True
     tableau[y][x].fonction = 1
     stack = [(x,y)]
