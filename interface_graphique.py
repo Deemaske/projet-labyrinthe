@@ -44,4 +44,18 @@ def agrandir(img,n):
 
 dimension = int(input("dimension : "))
 img = agrandir(dessiner(labyrinthe(dimension)), 100//dimension)
-img.show()
+img.save("bg.png", format="png")
+
+pygame.init()
+fond = pygame.image.load("bg.png")
+screen = pygame.display.set_mode(fond.get_size())
+fond = fond.convert()
+screen.blit(fond,(0,0))
+continuer = True
+while continuer:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            continuer = False
+    pygame.display.flip()
+
+pygame.quit()
