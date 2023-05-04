@@ -1,4 +1,4 @@
-from creation_labyrinthe import labyrinthe,Tuile
+from creation_labyrinthe import labyrinthe,Tuile,CASE_DEPART
 from PIL import Image
 import pygame
 

@@ -43,19 +43,18 @@ def tab_cul_de_sac(tableau):
                 tab.append((x,y))
     return tab
 
-def labyrinthe(dimension):
+def labyrinthe(dimension, depart_x = 0, depart_y = 0):
     """Permet de créer une liste de liste de tuiles permettant de représenter un labyrinthe carré d'une dimension donnée
     Entrée :
         dimension : int, le nombre de tuile par côté
+        depart_x : int, l'abscisse de la case de départ
+        depart_y : int, l'ordonnée de la case de départ
     Sortie:
         une liste de liste de tuile"""
     tableau = [[Tuile() for i in range(dimension)] for j in range(dimension)]
-    x,y = randint(0, dimension-1), randint(0, dimension-1)
-    CASE_DEPART = (x,y)
-    global CASE_DEPART
-    tableau[y][x].visitee = True
-    tableau[y][x].fonction = 1
-    stack = [(x,y)]
+    tableau[depart_y][depart_x].visitee = True
+    tableau[depart_y][depart_x].fonction = 1
+    stack = [(depart_x,depart_y)]
     while len(stack) != 0:
         x,y = stack.pop()
         voisin = voisin_non_visite(tableau, x, y)
