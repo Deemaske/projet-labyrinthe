@@ -1,14 +1,12 @@
 from PIL import Image
 from random import randint,choice
 
-#direction dans une liste : 0 = haut, 1 = droite, 2 = bas, 3 = gauche
-#la fonction d'une tuile : 0 = chemin, 1 = entrée, 2 = sortie
 class Tuile:
     """Classe permettant de simuler une tuile d'un quadrillage
     attribut :
         - direction : les directions du chemins passant par la tuile en suivant cet ordre : haut (0), droite (1), bas (2), gauche (3)
         - visitee : permet de savoir si la tuile a déjà été visitée ou non
-        - fonction : permet de savoir quel est le type de chemin passant par la tuile, 0 = chemin normal, 1 = entrée, 2 = sortie"""
+        - fonction : permet de savoir quel est le type de chemin passant par la tuile, 0 = chemin normal, 1 = entrée, 2 = sortie, 3 = joueur"""
     def __init__(self):
         self.direction = [0,0,0,0]
         self.visitee = False
