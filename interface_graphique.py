@@ -28,22 +28,8 @@ def dessiner(tableau):
                 image.putpixel((x*3,y*3+1),couleur)
     return image
 
-def agrandir(img,n):
-    """Permet de créer une version agrandi d'une image d'un facteur n
-    Entrée :
-        img : une image
-        n : int, le ratio d'aggrandissement de l'image
-    Sortie :
-        une image"""
-    if n<=1:return img
-    new_image = Image.new("RGB",(int(img.size[0]*n),int(img.size[1]*n)))
-    for x in range(new_image.size[0]):
-        for y in range(new_image.size[1]):
-            new_image.putpixel((x,y),img.getpixel((x//n,y//n)))
-    return new_image
-
-dimension = int(input("dimension : "))
-img = agrandir(dessiner(labyrinthe(dimension)), 100//dimension)
+img = dessiner(labyrinthe(20))
+img = img.resize((500,500),Image.Resampling.BOX)
 img.save("bg.png", format="png")
 
 pygame.init()
@@ -51,6 +37,7 @@ fond = pygame.image.load("bg.png")
 screen = pygame.display.set_mode(fond.get_size())
 fond = fond.convert()
 screen.blit(fond,(0,0))
+
 continuer = True
 while continuer:
     for event in pygame.event.get():
