@@ -28,7 +28,7 @@ def dessiner(tableau):
                 image.putpixel((x*3,y*3+1),couleur)
     return image
 
-img = dessiner(labyrinthe(25))
+img = dessiner(labyrinthe(15))
 img = img.resize((600,600),Image.Resampling.BOX)
 img.save("bg.png", format="png")
 
@@ -39,10 +39,20 @@ fond = fond.convert()
 screen.blit(fond,(0,0))
 
 continuer = True
+mouvement = False
 while continuer:
+    pygame.display.flip()
     for event in pygame.event.get():
-        if event.type == pygame.QUIT:
+        if event.type == pygame.QUIT or event.type == 771:
             continuer = False
+        if not mouvement:
+            pygame.mouse.set_pos((20,20))
+            mouvement = True
+        if fond.get_at(pygame.mouse.get_pos()) == (0,0,0,255):
+            mouvement = False
+        elif fond.get_at(pygame.mouse.get_pos()) == (255,0,0,255):
+            continuer = False
+            print("Vous avez gagné!")
     pygame.display.flip()
 
 pygame.quit()

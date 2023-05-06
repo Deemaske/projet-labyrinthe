@@ -1,4 +1,3 @@
-from PIL import Image
 from random import randint,choice
 
 class Tuile:
@@ -6,7 +5,7 @@ class Tuile:
     attribut :
         - direction : les directions du chemins passant par la tuile en suivant cet ordre : haut (0), droite (1), bas (2), gauche (3)
         - visitee : permet de savoir si la tuile a déjà été visitée ou non
-        - fonction : permet de savoir quel est le type de chemin passant par la tuile, 0 = chemin normal, 1 = entrée, 2 = sortie, 3 = joueur"""
+        - fonction : permet de savoir quel est le type de chemin passant par la tuile, 0 = chemin normal, 1 = entrée, 2 = sortie"""
     def __init__(self):
         self.direction = [0,0,0,0]
         self.visitee = False
