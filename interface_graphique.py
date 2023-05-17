@@ -44,14 +44,15 @@ screen.blit(fond,(0,0))
 
 continuer = True
 mouvement = False
-gagner = False
 while continuer:
     pygame.display.flip()
     screen.fill((0,0,0))
     screen.blit(fond,(0,0))
     screen.blit(texte.render(f"{int(time.time()-debut)//60 % 60:02}:{int(time.time()-debut)%60:02}", False, (255,255,255)), (240,fond.get_size()[1]))
     for event in pygame.event.get():
-        if event.type == pygame.QUIT or event.type == 771:
+        if event.type == pygame.QUIT:
+            pygame.quit()
+        elif event.type == 771:
             continuer = False
         if not mouvement:
             pygame.mouse.set_pos((20,20))
@@ -63,8 +64,7 @@ while continuer:
             gagner = True
 
 screen.fill((0,0,0))
-if gagner:
-    screen.blit(texte.render(f"Vous avez gagné en {int(time.time()-debut)//60 % 60:02}:{int(time.time()-debut)%60:02}",False,(255,255,255)),(50,300))
+screen.blit(texte.render(f"Vous avez gagné en {int(time.time()-debut)//60 % 60:02}:{int(time.time()-debut)%60:02}",False,(255,255,255)),(50,300))
 
 continuer = True
 while continuer:
