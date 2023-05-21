@@ -29,31 +29,19 @@ def dessiner(tableau):
                 image.putpixel((x*3,y*3+1),couleur)
     return image
 
-lvl = 10
-img = dessiner(labyrinthe(lvl))
-img = img.resize((600,600),Image.Resampling.BOX)
-img.save("bg.png", format="png")
 
 pygame.init()
-fond = pygame.image.load("bg.png")
-texte = pygame.font.Font(None,60)
-debut = time.time()
-dimension = fond.get_size()[0], fond.get_size()[1] + texte.render("0", False, (0,0,0)).get_size()[1]
-screen = pygame.display.set_mode(dimension)
-fond = fond.convert()
-screen.blit(fond,(0,0))
 
-#Apparence texte
-police = pygame.font.SysFont("calibri", 40)
-police_couleur = (255,255,255)
-def ecrire_texte(texte, police, police_couleur, x, y):
-    img = police.render(texte, True, police)
-    screen.blit(img, (x,y))
+#initialisation des variables de départ
+texte = pygame.font.Font(None,60)
+dimension = 600, 600 + texte.render("0", False, (0,0,0)).get_size()[1]
+screen = pygame.display.set_mode(dimension)
+
 
 #Afficher les bouttons 
-easybutton_img = pygame.image.load('Desktop/easybutton.png').convert_alpha()
-mediumbutton_img = pygame.image.load('Desktop/mediumbutton.png').convert_alpha()
-hardbutton_img = pygame.image.load('Desktop/hardbutton.png').convert_alpha()
+easybutton_img = pygame.image.load('easybutton.png').convert_alpha()
+mediumbutton_img = pygame.image.load('mediumbutton.png').convert_alpha()
+hardbutton_img = pygame.image.load('hardbutton.png').convert_alpha()
 
 class Button():
     def __init__(self, x, y, image, scale):
@@ -90,27 +78,27 @@ while continuer:
 
         if easy.draw():
             lvl = 5
-            img = dessiner(labyrinthe(lvl)) #on execute avec 5 de difficulté
-            img = img.resize((600,600),Image.Resampling.BOX)
-            img.save("bg.png", format="png")
-            fond = pygame.image.load("bg.png")
+            pos_depart =(60,60)
             continuer = False
         if medium.draw():
             lvl = 10
-            img = dessiner(labyrinthe(10)) #on execute avec 10 de difficulté
-            img = img.resize((600,600),Image.Resampling.BOX)
-            img.save("bg.png", format="png")
-            fond = pygame.image.load("bg.png")
+            pos_depart = (30,30)
             continuer = False
         if hard.draw():
             lvl = 15
-            img = dessiner(labyrinthe(15)) #on execute avec 15 de difficulté
-            img = img.resize((600,600),Image.Resampling.BOX)
-            img.save("bg.png", format="png")
-            fond = pygame.image.load("bg.png")
+            pos_depart = (20,20)
             continuer = False
         if event.type == pygame.QUIT:
             pygame.quit()
+
+#initialisation du labyrinthe
+img = dessiner(labyrinthe(lvl))
+img = img.resize((600,600),Image.Resampling.BOX)
+img.save("bg.png", format="png")
+fond = pygame.image.load("bg.png")
+fond = fond.convert()
+
+debut = time.time()
 
 continuer = True
 mouvement = False
@@ -121,21 +109,19 @@ while continuer:
     screen.blit(fond,(0,0))
     screen.blit(texte.render(f"{int(time.time()-debut)//60 % 60:02}:{int(time.time()-debut)%60:02}", False, (255,255,255)), (240,fond.get_size()[1]))
     for event in pygame.event.get():
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE:
-                print("test")
         if event.type == pygame.QUIT:
             pygame.quit()
         elif event.type == 771:
             continuer = False
         if not mouvement:
-            pygame.mouse.set_pos((40,40))
+            pygame.mouse.set_pos(pos_depart)
             mouvement = True
         if fond.get_at(pygame.mouse.get_pos()) == (0,0,0,255):
             mouvement = False
         elif fond.get_at(pygame.mouse.get_pos()) == (255,0,0,255):
             continuer = False
             gagner = True
+        print(pygame.mouse.get_pos())
 
 screen.fill((0,0,0))
 screen.blit(texte.render(f"Vous avez gagné en {int(time.time()-debut)//60 % 60:02}:{int(time.time()-debut)%60:02}",False,(255,255,255)),(50,300))
@@ -144,5 +130,5 @@ continuer = True
 while continuer:
     pygame.display.flip()
     for event in pygame.event.get():
-        if event.type == pygame.QUIT or event.type == 771:
+        if event.type == pygame.QUIT:
             continuer = False
