@@ -121,7 +121,6 @@ while continuer:
         elif fond.get_at(pygame.mouse.get_pos()) == (255,0,0,255):
             continuer = False
             gagner = True
-        print(pygame.mouse.get_pos())
 
 screen.fill((0,0,0))
 screen.blit(texte.render(f"Vous avez gagné en {int(time.time()-debut)//60 % 60:02}:{int(time.time()-debut)%60:02}",False,(255,255,255)),(50,300))
