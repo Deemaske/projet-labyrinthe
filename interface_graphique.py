@@ -111,8 +111,6 @@ while continuer:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
-        elif event.type == 771:
-            continuer = False
         if not mouvement:
             pygame.mouse.set_pos(pos_depart)
             mouvement = True
@@ -131,3 +129,4 @@ while continuer:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             continuer = False
+            pygame.quit()
